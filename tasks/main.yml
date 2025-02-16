@@ -1,2 +1,23 @@
 ---
-# tasks file for unifi
+- name: Install requirements
+  ansible.builtin.apt:
+    name: "{{ unify_required_packages }}"
+    state: present
+
+- name: Add Unifi GPG key
+  ansible.builtin.get_url:
+    url: "{{ unifi_gpg_key }}"
+    dest: /etc/apt/trusted.gpg.d/unifi-repo.gpg
+  when: unifi_use_repo
+
+- name: Add Unifi repository
+  ansible.builtin.apt_repository:
+    repo: "{{ unifi_repo }}"
+    state: present
+  when: unifi_use_repo
+
+- name: Install Unifi
+  ansible.builtin.apt:
+    name: "{{ unifi_packages }}"
+    state: present
+  when: unifi_use_repo

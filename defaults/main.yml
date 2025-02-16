@@ -1,2 +1,11 @@
 ---
-# defaults file for unifi
+unifi_use_repo: true
+unifi_gpg_key: "https://dl.ui.com/unifi/unifi-repo.gpg"
+unifi_repo: "deb [ arch=amd64,arm64 ] https://www.ui.com/downloads/unifi/debian stable ubiquiti"
+
+unify_required_packages:
+  - ca-certificates 
+  - apt-transport-https
+
+unifi_packages:
+  - unifi
